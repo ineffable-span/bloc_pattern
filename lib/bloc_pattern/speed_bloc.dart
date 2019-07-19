@@ -45,18 +45,19 @@ class SpeedBloc {
   void _mapEventToState(SpeedEvent event) {
     // A simple listener method (just a normal function)
 
-    // Increments _speed by 10 is the received event is SpeedUpEvent otherwise
+    // Increments _speed by 10 if the received event is SpeedUpEvent otherwise
     // does vice versa.
 
-    if (event is SpeedUpEvent) {
-      _speed += 10;
-    } else {
-      _speed -= 10;
-    }
+    _speed = event is SpeedUpEvent ? _speed + 10 : _speed - 10;
 
     if (_speed < 0) {
       // because negative speed makes no sense!
       _speed = 0;
+    } 
+
+    if (_speed > 120) {
+      // because I only own a Maruthi Suzuki Alto and it doesn't go beyont that.
+      _speed = 120;
     }
 
     // add the update value of the _speed to the _stateController via its sink.
